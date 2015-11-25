@@ -3,7 +3,7 @@
 To launch tests you need to add Yii 2 to /basic directory (download basic template). So the directory structure 
 has to look like this:
 
-![folderStructure.png](/tests/docs/folderStructure.png "folder structure)
+![folderStructure.png](/tests/docs/folderStructure.png "folder structure")
 
 Then you need to configure Yii to use database 'simpleactiverecord'. For this edit file /basic/config/db.php. 
 Line for dsn has to be something like this:
