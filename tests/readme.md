@@ -26,6 +26,11 @@ Time: 1.86 seconds, Memory: 11.50Mb
 OK (10 tests, 356 assertions)
 ```
 
-## Class diagram:
+## Code Coverage
+
+![codeCoverage.png](/tests/docs/codeCoverage.png "code coverage screenshot")
+
+
+## Class diagram
 
 ![UML.png](/tests/docs/UML.png "UML diagram")
