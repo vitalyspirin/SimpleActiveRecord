@@ -35,6 +35,9 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
         Yii::$app->db->close();
         Yii::$app->db->open();
 
+        $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
+        $result = $command->execute();
+
         parent::__construct();
     }
     
