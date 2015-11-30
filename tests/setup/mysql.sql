@@ -106,7 +106,7 @@ CREATE TABLE t1
     col_datetime1   DATETIME,
     col_datetime2   DATETIME NOT NULL,
     col_timestamp1  TIMESTAMP NULL,
-    col_timestamp2  TIMESTAMP,
+    col_timestamp2  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     col_time1       TIME,
     col_time2       TIME NOT NULL,
 

@@ -21,11 +21,20 @@ use app\models\T2YiiModel;
  * @covers TableSchema
  * @covers MySQLTableSchemaParser
  */
+ 
+/**
+* @backupGlobals disabled
+* @backupStaticAttributes disabled
+*/
+
 class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
 {
     
-    public function __construct()
+    public function __construct($name = NULL, array $data = array(), $dataName = '')
     {
+        $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
+        $result = $command->execute();
+        
         $SqlStr = file_get_contents(__DIR__ . "/../setup/mysql.sql");
         $command = Yii::$app->db->createCommand($SqlStr);
         $result = $command->execute();
@@ -37,8 +46,9 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
 
         $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
         $result = $command->execute();
-
-        parent::__construct();
+        
+        
+        parent::__construct($name, $data, $dataName);
     }
     
     
