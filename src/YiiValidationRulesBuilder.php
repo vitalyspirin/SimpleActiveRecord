@@ -205,9 +205,15 @@ class YiiValidationRulesBuilder extends TableSchema
         {
             if ( isset($valueList[0]) )
             {
-                $ruleList[] = [$valueList[0], 'number', 
-                    'min'=>$valueList['min'], 'max'=>$valueList['max']
-                ];
+                if ( isset($valueList['min']) )
+                {
+                    $ruleList[] = [$valueList[0], 'number', 
+                        'min'=>$valueList['min'], 'max'=>$valueList['max']
+                    ];
+                } else
+                {
+                    $ruleList[] = [$valueList[0], 'number'];
+                }
             }
         }
     }

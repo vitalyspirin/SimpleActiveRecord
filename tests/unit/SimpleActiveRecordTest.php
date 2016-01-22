@@ -107,6 +107,28 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
 
     }
 
+
+    public function testDecimal()
+    {
+        $t1 = new T1(false /*Yii style validation only*/);
+        $t1->attributes = Data::$dataForNotNullColumnsArray;
+        $t1->attributes = Data::$dataDefaultSQLValidForNotNullColumnsArray;
+        $t1->col_decimal1 = 'a';
+
+        $result = $t1->save();
+        $this->assertCount(1, $t1->getErrors());
+        
+        $t1 = new T1(/*maximum validation by default*/);
+        $t1->attributes = Data::$dataForNotNullColumnsArray;
+        $t1->attributes = Data::$dataDefaultSQLValidForNotNullColumnsArray;
+        $t1->attributes = Data::$dataStrictSQLValidForNotNullColumnsArray;
+        $t1->col_decimal1 = 'a';
+
+        $result = $t1->save();
+        $this->assertCount(1, $t1->getErrors());
+
+    }
+
     
     public function testSuccessfulSaveInDefaultSQLMode()
     {

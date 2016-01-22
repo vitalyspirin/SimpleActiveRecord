@@ -209,6 +209,9 @@ class MySqlTableSchemaParser
             {
                 $this->tableSchema->numberWithRangeColumnList['double'][0][] = $schemaRow['Field'];
             }
+        } elseif ( self::contains($schemaRow['Type'], ['decimal']) )
+        {
+            $this->tableSchema->numberWithRangeColumnList['decimal'][0][] = $schemaRow['Field'];
         }
     }
     
