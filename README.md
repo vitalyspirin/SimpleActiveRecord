@@ -58,7 +58,7 @@ $person = new Person(false  /*Yii style validation only*/ );
 var_dump($person->rules());
 ```
 
-then we will get the following output:
+we will get the following output:
 
 ```
 array (size=5)
@@ -104,7 +104,7 @@ $person = new Person();
 var_dump($person->rules());
 ```
 
-In the case the output will be the following (pay attention to 'person_gender' and 'person_dob' fields):
+In this case the output will be the following (pay attention to 'person_gender' and 'person_dob' fields):
 <pre>
 array (size=5)
   0 => 
@@ -120,8 +120,8 @@ array (size=5)
         array (size=1)
           0 => string '<b>person_gender</b>' (length=13)
       1 => string 'in' (length=2)
-      <i>'range' => 
-        array (size=2)
+      <i>'range' =>
+        <i>array (size=2)
           0 => string 'male' (length=4)
           1 => string 'female' (length=6)</i>
   2 => 
@@ -132,7 +132,7 @@ array (size=5)
       1 => string 'date' (length=4)
       <i>'format' => string 'yyyy-MM-dd' (length=10)
       'min' => string '1000-01-01' (length=10)
-      'max' => string '9999-12-31' (length=10)</e>
+      'max' => string '9999-12-31' (length=10)</i>
   3 => 
     array (size=2)
       0 => 
