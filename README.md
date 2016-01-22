@@ -2,7 +2,7 @@
 
 Extension of Yii 2 ActiveRecord with automatically generated validators.
 
-## Quick Start and Examples
+## Quick Start
 ```php
 class T1 extends SimpleActiveRecord
 {
@@ -30,5 +30,79 @@ var_dump($t1->rules());
 ```
 
 If table schema changed then validators will be adjusted automatically.
+
+## Examples
+
+Let's say we have the following SQL schema:
+```sql
+CREATE TABLE person
+(
+  person_id         INT PRIMARY KEY AUTO_INCREMENT,
+  person_firstname  VARCHAR(50) NOT NULL,
+  person_lastname   VARCHAR(35) NOT NULL,
+  person_gender     ENUM('male', 'female'),
+  person_dob        DATE NULL,
+  person_salary     DECIMAL
+);
+
+```
+
+then if we run the following code:
+
+```php
+class Person extends SimpleActiveRecord
+{
+    // totally empty class
+}
+
+$person = new Person(false  /*Yii style validation only*/ );
+var_dump($person->rules());
+```
+
+then we will get the following output:
+
+```
+array (size=6)
+  0 => 
+    array (size=2)
+      0 => 
+        array (size=2)
+          0 => string 'person_firstname' (length=16)
+          1 => string 'person_lastname' (length=15)
+      1 => string 'required' (length=8)
+  1 => 
+    array (size=2)
+      0 => 
+        array (size=1)
+          0 => string 'person_salary' (length=13)
+      1 => string 'number' (length=6)
+  2 => 
+    array (size=2)
+      0 => 
+        array (size=1)
+          0 => string 'person_dob' (length=10)
+      1 => string 'safe' (length=4)
+  3 => 
+    array (size=3)
+      0 => 
+        array (size=1)
+          0 => string 'person_firstname' (length=16)
+      1 => string 'string' (length=6)
+      'max' => int 50
+  4 => 
+    array (size=3)
+      0 => 
+        array (size=1)
+          0 => string 'person_lastname' (length=15)
+      1 => string 'string' (length=6)
+      'max' => int 35
+  5 => 
+    array (size=2)
+      0 => 
+        array (size=1)
+          0 => string 'person_gender' (length=13)
+      1 => string 'string' (length=6)
+```
+
 
 You can also see tests in [SimpleActiveRecordTest.php](tests/unit/SimpleActiveRecordTest.php) for simple examples.
