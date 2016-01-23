@@ -13,15 +13,23 @@ class SimpleActiveRecord extends yii\db\ActiveRecord
     
     public function __construct($maximumValidation = true, $config = [])
     {
-        $this->maximumValidation = $maximumValidation;
+        if ( is_bool($maximumValidation))
+        {
+            $this->maximumValidation = $maximumValidation;
+        } else
+        {
+            $this->maximumValidation = true;
+            $config = $maximumValidation; // probably $config passed as first 
+                                            // and only parameter
+        }
         
         $this->yiiValidationRulesBuilder = 
-            new YiiValidationRulesBuilder($maximumValidation, self::tableName());
+            new YiiValidationRulesBuilder($this->maximumValidation, self::tableName());
 
 
         if ( !isset(self::$ruleList[self::tableName()][$this->maximumValidation]) )
         {
-            if ($maximumValidation)
+            if ($this->maximumValidation)
             {
                 $this->buildStrictRules();
             } else

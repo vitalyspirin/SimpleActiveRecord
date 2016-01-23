@@ -298,8 +298,21 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
         
         $this->assertEquals($t1SafeList, $t1YiiModelSafeList);
     }
-    
-    
+
+
+    public function testForInputParameters()
+    {
+        $t1 = new T1( ['col_tinyint1'=>13] );
+        $this->assertEquals($t1->col_tinyint1, 13);
+        
+        $t1 = new T1( true, ['col_tinyint1'=>14] );
+        $this->assertEquals($t1->col_tinyint1, 14);
+        
+        $t1 = new T1( false, ['col_tinyint1'=>15] );
+        $this->assertEquals($t1->col_tinyint1, 15);
+    }
+
+
     protected function compareMultidimensionalArrays($array1, $array2, 
         $array1Name = "First array", $array2Name = "Second Array")
     {
