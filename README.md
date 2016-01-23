@@ -149,5 +149,17 @@ array (size=5)
       'max' => int 35
 </pre>
 
+You can also pass properties to contructor:
+```php
+$person = new Person(['person_firstname' => 'John', 'person_lastname' => 'Smith']);
+echo $person->person_firstname;
+```
+
+In the case above maximum validation will be chosen by default. You can specify validation level explicitly (Gii style validation in the example below):
+```php
+$person = new Person(false, ['person_firstname' => 'John', 'person_lastname' => 'Smith']);
+echo $person->person_firstname;
+```
+
 
 You can also see tests in [SimpleActiveRecordTest.php](tests/unit/SimpleActiveRecordTest.php) for simple examples.
