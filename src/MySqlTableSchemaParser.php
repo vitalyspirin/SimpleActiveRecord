@@ -211,7 +211,13 @@ class MySqlTableSchemaParser
             }
         } elseif ( self::contains($schemaRow['Type'], ['decimal']) )
         {
-            $this->tableSchema->numberWithRangeColumnList['decimal'][0][] = $schemaRow['Field'];
+            if ( self::contains($schemaRow['Type'], ['unsigned']) )
+            {
+                $this->tableSchema->numberWithRangeColumnList['decimal unsigned'][0][] = $schemaRow['Field'];
+            } else
+            {
+                $this->tableSchema->numberWithRangeColumnList['decimal'][0][] = $schemaRow['Field'];
+            }
         }
     }
     

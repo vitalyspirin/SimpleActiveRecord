@@ -124,9 +124,20 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
         $t1->attributes = Data::$dataStrictSQLValidForNotNullColumnsArray;
         $t1->col_decimal1 = 'a';
 
-        $result = $t1->save();
+        $t1->validate();
         $this->assertCount(1, $t1->getErrors());
 
+        $t1->col_decimal1 = 1.1;
+        $t1->validate();
+        $this->assertCount(0, $t1->getErrors());
+        
+        $t1->col_decimal3 = 'a';
+        $t1->validate();
+        $this->assertCount(1, $t1->getErrors());
+        
+        $t1->col_decimal3 = -1;
+        $t1->validate();
+        $this->assertCount(1, $t1->getErrors());
     }
 
     
