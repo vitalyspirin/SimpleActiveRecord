@@ -42,7 +42,7 @@ CREATE TABLE person
   person_lastname   VARCHAR(35) NOT NULL,
   person_gender     ENUM('male', 'female'),
   person_dob        DATE NULL,
-  person_salary     DECIMAL
+  person_salary     DECIMAL UNSIGNED
 );
 ```
 
@@ -54,7 +54,7 @@ class Person extends SimpleActiveRecord
     // totally empty class
 }
 
-$person = new Person(false  /*Yii style validation only*/ );
+$person = new Person(false  /*Gii style validation only*/ );
 var_dump($person->rules());
 ```
 
@@ -104,7 +104,7 @@ $person = new Person();
 var_dump($person->rules());
 ```
 
-In this case the output will be the following (pay attention to 'person_gender' and 'person_dob' fields):
+In this case the output will be the following (pay attention to 'person_gender', 'person_dob' and 'person_salary' fields):
 <pre>
 array (size=5)
   0 => 
@@ -119,8 +119,8 @@ array (size=5)
       0 => 
         array (size=1)
           0 => string '<b>person_gender</b>' (length=13)
-      1 => string 'in' (length=2)
-      <i>'range' =>
+      <i>1 => string 'in' (length=2)
+      'range' => 
         array (size=2)
           0 => string 'male' (length=4)
           1 => string 'female' (length=6)</i>
@@ -129,16 +129,17 @@ array (size=5)
       0 => 
         array (size=1)
           0 => string '<b>person_dob</b>' (length=10)
-      1 => string 'date' (length=4)
-      <i>'format' => string 'yyyy-MM-dd' (length=10)
+      <i>1 => string 'date' (length=4)
+      'format' => string 'yyyy-MM-dd' (length=10)
       'min' => string '1000-01-01' (length=10)
       'max' => string '9999-12-31' (length=10)</i>
   3 => 
-    array (size=2)
+    array (size=3)
       0 => 
         array (size=1)
-          0 => string 'person_salary' (length=13)
+          0 => string '<b>person_salary</b>' (length=13)
       1 => string 'number' (length=6)
+      <i>'min' => int 0</i>
   4 => 
     array (size=3)
       0 => 
