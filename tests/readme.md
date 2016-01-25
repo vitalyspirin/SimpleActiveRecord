@@ -19,11 +19,11 @@ The output should be like this:
 ```
 PHPUnit 4.8.16 by Sebastian Bergmann and contributors.
 
-..........
+............
 
-Time: 1.86 seconds, Memory: 11.50Mb
+Time: 1.36 seconds, Memory: 11.00Mb
 
-OK (10 tests, 356 assertions)
+OK (12 tests, 364 assertions)
 ```
 
 ## Code Coverage
