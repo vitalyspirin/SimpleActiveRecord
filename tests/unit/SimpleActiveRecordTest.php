@@ -324,6 +324,22 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
     }
 
 
+    public function testForAttributeLabels()
+    {
+        $t1 = new T1();
+        $t1YiiModel = new T1YiiModel();
+        
+        $this->assertEquals( count($t1->attributeLabels()), 
+            count($t1YiiModel->attributeLabels()) );
+        
+        foreach($t1YiiModel->attributeLabels() as $attribute => $label)
+        {
+            $this->assertTrue( isset($t1->attributeLabels()[$attribute]) );
+            $this->assertEquals($t1->attributeLabels()[$attribute], $label);
+        }
+    }
+
+
     protected function compareMultidimensionalArrays($array1, $array2, 
         $array1Name = "First array", $array2Name = "Second Array")
     {

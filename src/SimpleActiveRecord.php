@@ -2,6 +2,8 @@
 
 require_once 'YiiValidationRulesBuilder.php';
 
+use yii\helpers\Inflector;
+
 
 class SimpleActiveRecord extends yii\db\ActiveRecord
 {
@@ -51,7 +53,32 @@ class SimpleActiveRecord extends yii\db\ActiveRecord
     }
     
     
+    public function generateAttributeLabel($name)
+    {
+        $label = Inflector::camel2words($name);
+        // the following part is taken from Gii model generator
+        if (!empty($label) && substr_compare($label, ' id', -3, 3, true) === 0) {
+            $label = substr($label, 0, -3) . ' ID';
+        }
+        
+        return $label;
+    }
+    
+    
+    public function attributeLabels()
+    {
+        $attributeLabelList = [];
 
+        foreach($this->attributes() as $attribute)
+        {
+            $attributeLabelList[$attribute] = 
+                $this->generateAttributeLabel($attribute);
+        }
+        
+        return $attributeLabelList;
+    }
+    
+    
     protected function buildDefaultRules()
     {
         $ruleList = [];
