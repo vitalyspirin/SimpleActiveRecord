@@ -113,6 +113,10 @@ class MySqlTableSchemaParser
             $valueListStr = substr($schemaRow['Type'], $startPosition, -1);
 
             $this->tableSchema->rangeColumnList[$valueListStr][] = $schemaRow['Field'];
+            
+            
+            preg_match_all("/'(.*?)'/", $valueListStr, $matches);
+            $this->tableSchema->enumValuesColumnList[$schemaRow['Field']] = $matches[1];
         }
     }
 

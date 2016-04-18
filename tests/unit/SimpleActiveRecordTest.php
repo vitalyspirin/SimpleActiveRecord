@@ -340,6 +340,20 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
     }
 
 
+    public function testForEnumValues()
+    {
+        $t1 = new T1();
+        
+        $this->assertEquals( $t1->getEnumValues()['col_enum1'], ['value1']);
+        
+        $this->assertEquals( $t1->getEnumValues()['col_enum2'], 
+            ['value1', 'value2', 'value3']);
+            
+        $this->assertEquals( $t1->getEnumValues()['col_set1'], 
+            ['value1', 'value2']);
+    }
+
+
     protected function compareMultidimensionalArrays($array1, $array2, 
         $array1Name = "First array", $array2Name = "Second Array")
     {

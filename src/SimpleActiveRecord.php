@@ -79,6 +79,12 @@ class SimpleActiveRecord extends yii\db\ActiveRecord
     }
     
     
+    public function getEnumValues()
+    {
+        return $this->yiiValidationRulesBuilder->enumValuesColumnList;
+    }
+    
+    
     protected function buildDefaultRules()
     {
         $ruleList = [];
