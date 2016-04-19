@@ -11,19 +11,21 @@ Line for dsn has to be something like this:
     'dsn' => 'mysql:host=localhost;dbname=simpleactiverecord',
 ```
 
-After that you can launch tests using terminal command:
+After that you can launch tests using terminal command from inside "tests" diretory (that it would pick up phpunit.xml):
 ```
-$ phpunit  tests/unit/SimpleActiveRecordTest.php
+$ phpunit unit/SimpleActiveRecordTest.php --coverage-html codecoverage
 ```
 The output should be like this:
 ```
 PHPUnit 4.8.16 by Sebastian Bergmann and contributors.
 
-............
+...............
 
-Time: 1.36 seconds, Memory: 11.00Mb
+Time: 1.04 minutes, Memory: 15.50Mb
 
-OK (12 tests, 364 assertions)
+OK (15 tests, 649 assertions)
+
+Generating code coverage report in HTML format ... done
 ```
 
 ## Code Coverage
