@@ -64,14 +64,14 @@ class Data
         'col_binary4' => '12',
         'col_varchar2' => '123',
         'col_varbinary2' => '123',
-        'col_tinyblob2' => '101',
-        'col_tinytext2' => '102',
-        'col_blob2' => '103',
-        'col_text2' => '104',
-        'col_mediumblob2' => '105',
-        'col_mediumtext2' => '106',
-        'col_longblob2' => '107',
-        'col_longtext2' => '108'
+        'col_tinyblob2' => '101', // maximum length of 255 bytes.
+        'col_tinytext2' => '102', // maximum length of 255 characters
+        'col_blob2' => '103', // maximum length of 65,535 bytes
+        'col_text2' => '104', //  maximum length of 65,535 characters
+        'col_mediumblob2' => '105', // maximum length of 16,777,215 bytes
+        'col_mediumtext2' => '106', // maximum length of 16,777,215 characters
+        'col_longblob2' => '107', // maximum length of 4,294,967,295 or 4GB bytes
+        'col_longtext2' => '108' // maximum length of 4,294,967,295 or 4GB characters
     ];
     
     public static $dataStrictSQLValidForNotNullColumnsArray = [
@@ -103,6 +103,41 @@ class Data
         'col_time2' => '838:59:59' // valid max is only '838:59:59.000000'
     ];
 
+    public static $dataForColumnsWithDefaultValuesArray = [
+        'col_tinyint5' => 11,
+        'col_tinyint6' => 11,
+        'col_tinyint7' => 111,
+        'col_tinyint8' => 112,
+        'col_bool3' => true,
+        'col_boolean3' => false,
+        'col_smallint5' => 11,
+        'col_mediumint5' => 12,
+        'col_int5' => 13,
+        'col_integer5' => 13,
+        'col_bigint6' => 14,
+        'col_decimal5' => 15,
+        'col_dec5' => 16,
+        'col_float5' => 17,
+        'col_double5' => 18,
+        'col_doubleprecision5' => 19,
+        
+        'col_char5' => 'a',
+        'col_char6' => 'b',
+        'col_varchar3' => 'cd',
+        'col_varchar4' => 'efg',
+        'col_binary5' => 'hi',
+        'col_binary6' => 'jk',
+        'col_varbinary3' => 'lm',
+        'col_varbinary4' => 'no',
+
+        'col_enum3' => 'value2',
+        'col_set3' => 'value2',
+        
+        'col_datetime3' => '2014-01-02 00:01:02',
+        'col_datetime4' => '2015-03-04 09:10:20'
+    ];
+    
+    
     public static $dataPrimaryKeyArray = [
         'col_id' => 1
     ];

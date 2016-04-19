@@ -344,13 +344,33 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
     {
         $t1 = new T1();
         
-        $this->assertEquals( $t1->getEnumValues()['col_enum1'], ['value1']);
+        $this->assertEquals( $t1->getEnumValues()['col_enum1'], ['value1', 'value2']);
         
         $this->assertEquals( $t1->getEnumValues()['col_enum2'], 
             ['value1', 'value2', 'value3']);
             
         $this->assertEquals( $t1->getEnumValues()['col_set1'], 
             ['value1', 'value2']);
+    }
+
+
+    public function testDefaultValues()
+    {
+        $t1 = new T1();
+        
+        $t1->attributes = Data::$dataForNotNullColumnsArray;
+        $t1->attributes = Data::$dataDefaultSQLValidForNotNullColumnsArray;
+        $t1->attributes = Data::$dataStrictSQLValidForNotNullColumnsArray;
+        
+        $result = $t1->save();
+        
+        $this->assertTrue($result);
+        
+        foreach(Data::$dataForColumnsWithDefaultValuesArray as $columnName=>$defaulValue)
+        {
+            $this->assertEquals($t1->$columnName, $defaulValue);
+        }
+
     }
 
 
