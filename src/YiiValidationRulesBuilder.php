@@ -223,5 +223,21 @@ class YiiValidationRulesBuilder extends TableSchema
         }
     }
     
+    public function buildDefaultRules(&$ruleList)
+    {
+        foreach($this->defaultColumnList as $value=>$attributeList)
+        {
+            if ($value === 'CURRENT_TIMESTAMP')
+            {
+                $ruleList[] = [$attributeList, 'default', 'value' => 
+                    function ($model, $attribute) { return date('Y-m-d H:i:s'); }
+                ];
+             
+            } else
+            {
+                $ruleList[] = [$attributeList, 'default', 'value' => $value];
+            }
+        }
+    }
     
 }

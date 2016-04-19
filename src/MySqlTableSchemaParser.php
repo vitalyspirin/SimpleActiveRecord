@@ -35,6 +35,8 @@ class MySqlTableSchemaParser
             }
             $this->checkNumberType($schemaRow);
             $this->checkForPositive($schemaRow);
+            
+            $this->checkForDefault($schemaRow);
         }
     }
     
@@ -231,6 +233,16 @@ class MySqlTableSchemaParser
         if ( self::contains($schemaRow['Type'], 'unsigned') )
         {
             $this->tableSchema->positiveColumnList[] = $schemaRow['Field'];
+        }
+    }
+
+
+    protected function checkForDefault($schemaRow)
+    {
+        if ($schemaRow['Default'] != null)
+        {
+            $this->tableSchema->defaultColumnList[ $schemaRow['Default'] ][] =
+                $schemaRow['Field'];
         }
     }
 

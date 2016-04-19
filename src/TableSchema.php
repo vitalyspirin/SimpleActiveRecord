@@ -17,6 +17,7 @@ class TableSchema
     public $rangeColumnList = [];
     public $enumValuesColumnList = [];
     public $positiveColumnList = [];
+    public $defaultColumnList = [];
         
     public $dateColumnList = [
         'datetime' => [

@@ -9,7 +9,7 @@ class SimpleActiveRecord extends yii\db\ActiveRecord
 {
    
     protected static $ruleList = [];
-    protected $yiiValidationRulesBuilder;
+    public $yiiValidationRulesBuilder;
     protected $maximumValidation;
     
     
@@ -126,6 +126,8 @@ class SimpleActiveRecord extends yii\db\ActiveRecord
         $this->yiiValidationRulesBuilder->buildStringRules($ruleList);
         
         $this->yiiValidationRulesBuilder->buildUniqueRules($ruleList);
+        
+        $this->yiiValidationRulesBuilder->buildDefaultRules($ruleList);
         
         self::$ruleList[self::tableName()][$this->maximumValidation] = $ruleList;
     }
