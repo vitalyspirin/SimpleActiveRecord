@@ -1,6 +1,6 @@
 {
     "name": "vitalyspirin/yii2-simpleactiverecord",
-    "type": "library",
+    "type": "yii2-extension",
     "description": "Extension of Yii2 ActiveRecord with added automatically generaged validators",
     "keywords": ["activerecord","active record", "simpleactiverecord", "simple active record"],
     "homepage": "https://github.com/vitalyspirin/yii2-simpleactiverecord",
