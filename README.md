@@ -3,6 +3,14 @@
 Extension of Yii 2 ActiveRecord with automatically generated validators.
 
 ## Quick Start
+
+To install it you can just download zip or use composer:
+```
+composer require vitalyspirin/yii2-simpleactiverecord @dev
+```
+
+To use it in code:
+
 ```php
 class T1 extends SimpleActiveRecord
 {
