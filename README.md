@@ -12,6 +12,9 @@ composer require vitalyspirin/yii2-simpleactiverecord @dev
 To use it in code:
 
 ```php
+use vitalyspirin\yii2\simpleactiverecord\SimpleActiveRecord;
+
+
 class T1 extends SimpleActiveRecord
 {
     
@@ -57,6 +60,9 @@ CREATE TABLE person
 then if we run the following code:
 
 ```php
+use vitalyspirin\yii2\simpleactiverecord\SimpleActiveRecord;
+
+
 class Person extends SimpleActiveRecord
 {
     // totally empty class
