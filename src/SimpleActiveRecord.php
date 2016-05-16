@@ -1,11 +1,13 @@
 <?php
 
+namespace vitalyspirin\yii2\simpleactiverecord;
+
 require_once 'YiiValidationRulesBuilder.php';
 
 use yii\helpers\Inflector;
 
 
-class SimpleActiveRecord extends yii\db\ActiveRecord
+class SimpleActiveRecord extends \yii\db\ActiveRecord
 {
    
     protected static $ruleList = [];

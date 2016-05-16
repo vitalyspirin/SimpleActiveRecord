@@ -1,15 +1,15 @@
 <?php
 
-require __DIR__ . '/../setup/yii_init.php';
+require(__DIR__ . '/../setup/yii_init.php');
 
 ini_set('display_errors', 1);
 
-require_once __DIR__ . '/../../src/SimpleActiveRecord.php';
-require_once __DIR__ . '/../setup/T1.php';
-require_once __DIR__ . '/../setup/T2.php';
-require_once __DIR__ . '/../setup/T1YiiModel.php';
-require_once __DIR__ . '/../setup/T2YiiModel.php';
-require_once __DIR__ . '/../setup/Data.php';
+require_once(__DIR__ . '/../../src/SimpleActiveRecord.php');
+require_once(__DIR__ . '/../setup/T1.php');
+require_once(__DIR__ . '/../setup/T2.php');
+require_once(__DIR__ . '/../setup/T1YiiModel.php');
+require_once(__DIR__ . '/../setup/T2YiiModel.php');
+require_once(__DIR__ . '/../setup/Data.php');
 
 use app\models\T1YiiModel;
 use app\models\T2YiiModel;

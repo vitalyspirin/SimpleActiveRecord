@@ -1,6 +1,8 @@
 <?php
 
-require_once 'TableSchema.php';
+namespace vitalyspirin\yii2\simpleactiverecord;
+
+require_once('TableSchema.php');
 
 
 class MySqlTableSchemaParser

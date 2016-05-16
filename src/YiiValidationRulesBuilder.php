@@ -1,20 +1,24 @@
 <?php
 
-require_once 'TableSchema.php';
-require_once 'MySqlTableSchemaParser.php';
+namespace vitalyspirin\yii2\simpleactiverecord;
+
+require_once('TableSchema.php');
+require_once('MySqlTableSchemaParser.php');
 
 
 class YiiValidationRulesBuilder extends TableSchema
 {
     const DATABASE_IS_NOT_SUPPORTED = 'Database is not supported';
-    public static  $supportedDatabaseList = ['mysql' => 'MySqlTableSchemaParser'];
+    public static  $supportedDatabaseList = [
+        'mysql' => 'vitalyspirin\yii2\simpleactiverecord\MySqlTableSchemaParser'
+    ];
     protected $tableSchemaParserClass;
     
     
     public function __construct($maximumValidation, $tableName)
     {
         
-        if (! $this->isDatabaseSupported(Yii::$app->db->dsn))
+        if (! $this->isDatabaseSupported(\Yii::$app->db->dsn))
         {
             throw new Exception(DATABASE_IS_NOT_SUPPORTED);
         }
@@ -26,11 +30,11 @@ class YiiValidationRulesBuilder extends TableSchema
         } else
         {
 
-            $command = Yii::$app->db->createCommand('DESCRIBE ' . $tableName);
+            $command = \Yii::$app->db->createCommand('DESCRIBE ' . $tableName);
             $tableSchemaRowList = $command->queryAll();
             MySqlTableSchemaParser::$describeTable[$tableName] = $tableSchemaRowList;
             
-            $command = Yii::$app->db->createCommand('SHOW CREATE TABLE ' . $tableName);
+            $command = \Yii::$app->db->createCommand('SHOW CREATE TABLE ' . $tableName);
             $tableSchemaStr = $command->queryAll();
             MySqlTableSchemaParser::$showCreateTable[$tableName] = 
                 $tableSchemaStr[0]['Create Table'];
@@ -133,7 +137,7 @@ class YiiValidationRulesBuilder extends TableSchema
                 $columnListAsStr = [];
                 foreach($columnInOneConstraintList as $columnName)
                 {
-                    $columnListAsStr[] = yii\helpers\Inflector::camel2words($columnName);
+                    $columnListAsStr[] = \yii\helpers\Inflector::camel2words($columnName);
                 }
 
                 $ruleList[] = [$columnInOneConstraintList, 'unique', 
