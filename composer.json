@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Yii2\\SimpleActiveRecord\\": "src/"
+            "vitalyspirin\\yii2\\simpleactiverecord\\": "src/"
         }
     }
 }
