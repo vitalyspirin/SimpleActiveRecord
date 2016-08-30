@@ -8,12 +8,10 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 require(__DIR__ . '/../../vendor/yiisoft/yii2/Yii.php');
 
 
-if ( php_sapi_name() === 'cli')
-{
+if (php_sapi_name() === 'cli') {
     $config = require(__DIR__ . '/config/console.php');
     $application = new yii\console\Application($config);
-} else
-{
+} else {
     $yiiConfig = require(__DIR__ . '/config/web.php');
     new yii\web\Application($yiiConfig); // Do NOT call run() here
 }

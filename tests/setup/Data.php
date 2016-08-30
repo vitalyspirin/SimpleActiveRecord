@@ -28,7 +28,7 @@ class Data
         'col_double4' => 1.7976931348623157E+309, // valid max is only 1.7976931348623157E+308
         'col_doubleprecision2' => 1.7976931348623157E+309,
         'col_doubleprecision4' => 1.7976931348623157E+309,
-        
+
         'col_char2' => '123',
         'col_char4' => '123',
         'col_varchar2' => '1234',
@@ -43,15 +43,15 @@ class Data
         'col_mediumtext2' => 106,
         'col_longblob2' => 107,
         'col_longtext2' => 108,
-        
+
         'col_enum2' => 'val1',
         'col_set2' => 'val2',
         'col_date2' => '999-01-01',
         'col_datetime2' => '999-01-01 00:00:00.000000',
         'col_time2' => '839:59:59.000000' // valid max is only '838:59:59.000000'
-    ]; 
+    ];
 
-        
+
     public static $dataDefaultSQLValidForNotNullColumnsArray = [
         'col_bigint2' => 9223372036854775807,
         'col_double2' => 1.7976931348623157E+308,
@@ -73,7 +73,7 @@ class Data
         'col_longblob2' => '107', // maximum length of 4,294,967,295 or 4GB bytes
         'col_longtext2' => '108' // maximum length of 4,294,967,295 or 4GB characters
     ];
-    
+
     public static $dataStrictSQLValidForNotNullColumnsArray = [
         'col_bit2' => true,
         'col_bit4' => false,
@@ -90,12 +90,12 @@ class Data
         'col_integer4' => 4294967295, // valid max is only 4294967295
     //    'col_bigint2' => 9223372036854775807, // valid max is only 9223372036854775807
     //    'col_bigint4' => 9223372036854775807, // valid max is only 9223372036854775807
-        
+
         'col_float2' => 3.402823466E+38, // valid max is only 3.402823466E+38
         'col_float4' => 3.402823466E+38,// valid max is only 3.402823466E+38
     //    'col_double2' => 1.7976931348623157E+308, // valid max is only 1.7976931348623157E+308
     //    'col_double4' => 1.7976931348623157E+309, // valid max is only 1.7976931348623157E+308
-    
+
         'col_enum2' => 'value1',
         'col_set2' => 'value2',
         'col_date2' => '1000-01-01',
@@ -120,7 +120,7 @@ class Data
         'col_float5' => 17,
         'col_double5' => 18,
         'col_doubleprecision5' => 19,
-        
+
         'col_char5' => 'a',
         'col_char6' => 'b',
         'col_varchar3' => 'cd',
@@ -132,12 +132,12 @@ class Data
 
         'col_enum3' => 'value2',
         'col_set3' => 'value2',
-        
+
         'col_datetime3' => '2014-01-02 00:01:02',
         'col_datetime4' => '2015-03-04 09:10:20'
     ];
-    
-    
+
+
     public static $dataPrimaryKeyArray = [
         'col_id' => 1
     ];

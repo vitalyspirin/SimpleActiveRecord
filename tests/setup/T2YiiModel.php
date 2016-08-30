@@ -2,13 +2,10 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "t2".
  *
  * @property integer $col_id
- *
  * @property T1 $col
  */
 class T2YiiModel extends \yii\db\ActiveRecord

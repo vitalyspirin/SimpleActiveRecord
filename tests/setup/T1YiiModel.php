@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "t1".
  *
@@ -133,7 +131,6 @@ use Yii;
  * @property string $col_timestamp2
  * @property string $col_time1
  * @property string $col_time2
- *
  * @property T2 $t2
  */
 class T1YiiModel extends \yii\db\ActiveRecord
