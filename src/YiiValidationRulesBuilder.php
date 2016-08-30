@@ -2,9 +2,6 @@
 
 namespace vitalyspirin\yii2\simpleactiverecord;
 
-require_once('TableSchema.php');
-require_once('MySqlTableSchemaParser.php');
-
 
 class YiiValidationRulesBuilder extends TableSchema
 {

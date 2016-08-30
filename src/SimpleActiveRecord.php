@@ -2,7 +2,6 @@
 
 namespace vitalyspirin\yii2\simpleactiverecord;
 
-require_once 'YiiValidationRulesBuilder.php';
 
 use yii\helpers\Inflector;
 
