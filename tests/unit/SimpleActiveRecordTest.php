@@ -33,7 +33,13 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
-        $result = $command->execute();
+        try {
+            $result = $command->execute();
+        } catch(Exception $e) {
+            echo 'Exception: ' . $e->getMessage() . "\n";
+            echo "Possilbe cause: MySQL is not running!\n";
+            exit;
+        }
 
         $command = Yii::$app->db->nocache(function (\yii\db\Connection $db) {
             $SqlStr = file_get_contents(__DIR__ . '/../setup/mysql.sql');
