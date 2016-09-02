@@ -28,18 +28,27 @@ use app\models\T2YiiModel;
 
 class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
 {
+    protected $testDBName = 'simpleactiverecord';
+    
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
         $result = $command->execute();
 
-        $SqlStr = file_get_contents(__DIR__ . '/../setup/mysql.sql');
-        $command = Yii::$app->db->createCommand($SqlStr);
+        $command = Yii::$app->db->nocache(function (\yii\db\Connection $db) {
+            $SqlStr = file_get_contents(__DIR__ . '/../setup/mysql.sql');
+            return $db->createCommand($SqlStr);
+        });
         $result = $command->execute();
 
+        
         // closing and opening connection below is needed otherwise Yii gives error:
         // "Cannot execute queries while other unbuffered queries are active."
         Yii::$app->db->close();
+
+        if ( strpos(Yii::$app->db->dsn, 'dbname') === false) {
+            Yii::$app->db->dsn .= ';dbname=' . $this->testDBName;
+        }
         Yii::$app->db->open();
 
         $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
