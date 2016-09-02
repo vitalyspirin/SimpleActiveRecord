@@ -29,13 +29,13 @@ use app\models\T2YiiModel;
 class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
 {
     protected $testDBName = 'simpleactiverecord';
-    
+
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
         try {
             $result = $command->execute();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             echo 'Exception: ' . $e->getMessage() . "\n";
             echo "Possilbe cause: MySQL is not running!\n";
             exit;
@@ -43,16 +43,17 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
 
         $command = Yii::$app->db->nocache(function (\yii\db\Connection $db) {
             $SqlStr = file_get_contents(__DIR__ . '/../setup/mysql.sql');
+
             return $db->createCommand($SqlStr);
         });
         $result = $command->execute();
 
-        
+
         // closing and opening connection below is needed otherwise Yii gives error:
         // "Cannot execute queries while other unbuffered queries are active."
         Yii::$app->db->close();
 
-        if ( strpos(Yii::$app->db->dsn, 'dbname') === false) {
+        if (strpos(Yii::$app->db->dsn, 'dbname') === false) {
             Yii::$app->db->dsn .= ';dbname=' . $this->testDBName;
         }
         Yii::$app->db->open();
