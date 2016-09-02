@@ -1,34 +1,39 @@
 ## Launching tests
 
-To launch tests you need to add Yii 2 to /basic directory (download basic template). So the directory structure 
-has to look like this:
-
-![folderStructure.png](/tests/docs/folderStructure.png "folder structure")
-
-Then you need to configure Yii to use database 'simpleactiverecord'. For this edit file /basic/config/db.php. 
-Line for dsn has to be something like this:
-```php
-    'dsn' => 'mysql:host=localhost;dbname=simpleactiverecord',
+To launch tests you can clone the project and install all dependencies:
+```
+git clone https://github.com/vitalyspirin/yii2-simpleactiverecord.git
+cd yii2-simpleactiverecord/
+composer global require "fxp/composer-asset-plugin:^1.2.0"
+composer install
 ```
 
-After that you can launch tests using terminal command from inside "tests" diretory (that it would pick up phpunit.xml):
+
+Then you need to configure Yii to access database 'simpleactiverecord'. For this edit file /tests/setup/config/db.php setting up
+appropriate user, password and dsn (if database 'simpleactiverecord' doesn't exist it will be created automatically).
+
+After that you can launch tests:
 ```
-$ phpunit unit/SimpleActiveRecordTest.php --coverage-html codecoverage
+composer test
 ```
 The output should be like this:
 ```
-PHPUnit 4.8.16 by Sebastian Bergmann and contributors.
+> vendor/bin/phpunit --configuration tests tests/unit/
+PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
 
 ...............
 
-Time: 1.04 minutes, Memory: 15.50Mb
+Time: 2.95 seconds, Memory: 11.75MB
 
 OK (15 tests, 649 assertions)
-
-Generating code coverage report in HTML format ... done
 ```
 
 ## Code Coverage
+
+If you want to get code coverage then you can run tests in this way:
+```
+composer test2
+```
 
 ![codeCoverage.png](/tests/docs/codeCoverage.png "code coverage screenshot")
 
