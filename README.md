@@ -176,5 +176,21 @@ $person = new Person(false, ['person_firstname' => 'John', 'person_lastname' => 
 echo $person->person_firstname;
 ```
 
+## Additional features
+
+This extension of Active Record has also function getEnumValues() that shows enum values for table column. The following code
+```php
+$person = new Person();
+var_dump($person->getEnumValues());
+```
+will return 
+```
+array (size=1)
+  'person_gender' => 
+    array (size=2)
+      0 => string 'male' (length=4)
+      1 => string 'female' (length=6)
+```
+
 
 You can also see tests in [SimpleActiveRecordTest.php](tests/unit/SimpleActiveRecordTest.php) for simple examples.
