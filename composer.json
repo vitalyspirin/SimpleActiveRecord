@@ -17,8 +17,9 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.5"
     },
-     "require-dev": {
+    "require-dev": {
         "yiisoft/yii2-gii": "~2.0",
+        "yiisoft/yii2-debug": "~2.0.0",
         "phpunit/phpunit": "4.8.*",
         "friendsofphp/php-cs-fixer": "^1.11"
     },

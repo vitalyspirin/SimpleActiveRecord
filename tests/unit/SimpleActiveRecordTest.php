@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__ . '/../setup/yii_init.php');
+require_once(__DIR__ . '/../setup/yii_init.php');
 
 ini_set('display_errors', 1);
 
@@ -28,8 +28,17 @@ use app\models\T2YiiModel;
 
 class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
 {
-    protected $testDBName = 'simpleactiverecord';
+    protected static $testDBName = 'simpleactiverecord';
 
+
+    public static function setDSN()
+    {
+        if (strpos(Yii::$app->db->dsn, 'dbname') === false) {
+            Yii::$app->db->dsn .= ';dbname=' . self::$testDBName;
+        }
+    }
+    
+    
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
@@ -52,10 +61,7 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
         // closing and opening connection below is needed otherwise Yii gives error:
         // "Cannot execute queries while other unbuffered queries are active."
         Yii::$app->db->close();
-
-        if (strpos(Yii::$app->db->dsn, 'dbname') === false) {
-            Yii::$app->db->dsn .= ';dbname=' . $this->testDBName;
-        }
+        self::setDSN();
         Yii::$app->db->open();
 
         $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
