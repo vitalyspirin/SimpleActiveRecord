@@ -114,13 +114,13 @@ class MySqlTableSchemaParser
 
     protected function checkForDate($schemaRow)
     {
-        if (self::contains($schemaRow['Type'], 'datetime')) {
+        if (static::startsWith($schemaRow['Type'], 'datetime')) {
             $this->tableSchema->dateColumnList['datetime'][0][] = $schemaRow['Field'];
-        } elseif (self::contains($schemaRow['Type'], 'timestamp')) {
+        } elseif (static::startsWith($schemaRow['Type'], 'timestamp')) {
             $this->tableSchema->dateColumnList['timestamp'][0][] = $schemaRow['Field'];
-        } elseif (self::contains($schemaRow['Type'], 'date')) {
+        } elseif (static::startsWith($schemaRow['Type'], 'date')) {
             $this->tableSchema->dateColumnList['date'][0][] = $schemaRow['Field'];
-        } elseif (self::contains($schemaRow['Type'], 'time')) {
+        } elseif (static::startsWith($schemaRow['Type'], 'time')) {
             $this->tableSchema->timeColumnList[] = $schemaRow['Field'];
         }
     }
@@ -224,6 +224,18 @@ class MySqlTableSchemaParser
             if ($result === true) {
                 break;
             }
+        }
+
+        return $result;
+    }
+
+
+    protected static function startsWith($haystack, $needle)
+    {
+        if (substr($haystack, 0, strlen($needle)) === $needle) {
+            $result = true;
+        } else {
+            $result = false;
         }
 
         return $result;
