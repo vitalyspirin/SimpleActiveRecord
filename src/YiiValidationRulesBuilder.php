@@ -43,7 +43,7 @@ class YiiValidationRulesBuilder extends TableSchema
     {
         $result = false;
 
-        foreach (self::$supportedDatabaseList as $supportedDatabase => $tableSchemaClass) {
+        foreach (static::$supportedDatabaseList as $supportedDatabase => $tableSchemaClass) {
             if (substr($dns, 0, strlen($supportedDatabase)) == $supportedDatabase) {
                 $this->tableSchemaParserClass = $tableSchemaClass;
 

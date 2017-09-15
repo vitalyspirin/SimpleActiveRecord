@@ -22,10 +22,10 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
         }
 
         $this->yiiValidationRulesBuilder =
-            new YiiValidationRulesBuilder($this->maximumValidation, self::tableName());
+            new YiiValidationRulesBuilder($this->maximumValidation, static::tableName());
 
 
-        if (!isset(self::$ruleList[self::tableName()][$this->maximumValidation])) {
+        if (!isset(static::$ruleList[static::tableName()][$this->maximumValidation])) {
             if ($this->maximumValidation) {
                 $this->buildStrictRules();
             } else {
@@ -41,7 +41,7 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
 
     public function rules()
     {
-        return self::$ruleList[self::tableName()][$this->maximumValidation];
+        return static::$ruleList[static::tableName()][$this->maximumValidation];
     }
 
 
@@ -94,7 +94,7 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
 
         $this->yiiValidationRulesBuilder->buildUniqueRules($ruleList);
 
-        self::$ruleList[self::tableName()][$this->maximumValidation] = $ruleList;
+        static::$ruleList[static::tableName()][$this->maximumValidation] = $ruleList;
     }
 
 
@@ -120,6 +120,6 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
 
         $this->yiiValidationRulesBuilder->buildDefaultRules($ruleList);
 
-        self::$ruleList[self::tableName()][$this->maximumValidation] = $ruleList;
+        static::$ruleList[static::tableName()][$this->maximumValidation] = $ruleList;
     }
 }

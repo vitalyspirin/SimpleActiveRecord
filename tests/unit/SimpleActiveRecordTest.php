@@ -7,6 +7,7 @@ ini_set('display_errors', 1);
 require_once(__DIR__ . '/../../src/SimpleActiveRecord.php');
 require_once(__DIR__ . '/../setup/T1.php');
 require_once(__DIR__ . '/../setup/T2.php');
+require_once(__DIR__ . '/../setup/T3.php');
 require_once(__DIR__ . '/../setup/T1YiiModel.php');
 require_once(__DIR__ . '/../setup/T2YiiModel.php');
 require_once(__DIR__ . '/../setup/Data.php');
@@ -37,8 +38,8 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
             Yii::$app->db->dsn .= ';dbname=' . self::$testDBName;
         }
     }
-    
-    
+
+
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
@@ -379,6 +380,17 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
 
         foreach (Data::$dataForColumnsWithDefaultValuesArray as $columnName => $defaulValue) {
             $this->assertEquals($t1->$columnName, $defaulValue);
+        }
+    }
+
+
+    public function testTableNameMethod()
+    {
+        try {
+            $t3 = new T3();
+            $this->assertTrue(true);
+        } catch (Exception $e) {
+            $this->assertTrue(false, $e->getMessage());
         }
     }
 
