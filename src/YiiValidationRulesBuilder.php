@@ -27,8 +27,11 @@ class YiiValidationRulesBuilder extends TableSchema
 
             $command = \Yii::$app->db->createCommand('SHOW CREATE TABLE ' . $tableName); // to get 'UNIQUE KEY'
             $tableSchemaStr = $command->queryAll();
-            MySqlTableSchemaParser::$showCreateTable[$tableName] =
-                $tableSchemaStr[0]['Create Table'];
+
+            // Note: MySQL View will have 'Create View' column instead of 'Create Table'
+            if (isset($tableSchemaStr[0]['Create Table'])) {
+                MySqlTableSchemaParser::$showCreateTable[$tableName] = $tableSchemaStr[0]['Create Table'];
+            }
         }
 
         $tableSchemaParser = new $this->tableSchemaParserClass($this, $tableName,

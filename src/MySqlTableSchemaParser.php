@@ -86,13 +86,15 @@ class MySqlTableSchemaParser
 
     protected function checkForUnique()
     {
-        $pattern = '/UNIQUE KEY .*?\((.*?)\)/sm';
-        preg_match_all($pattern, self::$showCreateTable[$this->tableName], $matches);
+        if (isset(self::$showCreateTable[$this->tableName])) {
+            $pattern = '/UNIQUE KEY .*?\((.*?)\)/sm';
+            preg_match_all($pattern, self::$showCreateTable[$this->tableName], $matches);
 
-        foreach ($matches[1] as $uniqueConstraint) {
-            $pattern = '/(`([^`]+)`,?)+?/sm';
-            preg_match_all($pattern, $uniqueConstraint, $matches2);
-            $this->tableSchema->uniqueColumnList[] = $matches2[2];
+            foreach ($matches[1] as $uniqueConstraint) {
+                $pattern = '/(`([^`]+)`,?)+?/sm';
+                preg_match_all($pattern, $uniqueConstraint, $matches2);
+                $this->tableSchema->uniqueColumnList[] = $matches2[2];
+            }
         }
     }
 

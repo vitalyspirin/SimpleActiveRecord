@@ -166,3 +166,7 @@ CREATE TABLE person
   person_dob        DATE NULL,
   person_salary     DECIMAL UNSIGNED
 );
+
+CREATE OR REPLACE VIEW person_view AS
+SELECT *
+FROM person;

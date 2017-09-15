@@ -9,6 +9,7 @@ require_once(__DIR__ . '/../setup/T1.php');
 require_once(__DIR__ . '/../setup/T2.php');
 require_once(__DIR__ . '/../setup/T3.php');
 require_once(__DIR__ . '/../setup/Person.php');
+require_once(__DIR__ . '/../setup/PersonView.php');
 require_once(__DIR__ . '/../setup/T1YiiModel.php');
 require_once(__DIR__ . '/../setup/T2YiiModel.php');
 require_once(__DIR__ . '/../setup/Data.php');
@@ -419,6 +420,13 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($attributeLabels['person_firstname'], 'First name');
         $this->assertEquals($attributeLabels['person_lastname'], 'Last name');
         $this->assertEquals($attributeLabels['person_gender'], 'Person Gender');
+    }
+
+
+    public function testView()
+    {
+        $person = new PersonView();
+        $this->assertTrue(true);
     }
 
 
