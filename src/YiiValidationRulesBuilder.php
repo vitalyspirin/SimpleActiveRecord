@@ -202,7 +202,11 @@ class YiiValidationRulesBuilder extends TableSchema
                     }
                 ];
             } else {
-                $ruleList[] = [$attributeList, 'default', 'value' => $value];
+                if ($value === '') {
+                    $ruleList[] = [$attributeList, 'default'];
+                } else {
+                    $ruleList[] = [$attributeList, 'default', 'value' => $value];
+                }
             }
         }
     }

@@ -26,7 +26,10 @@ class MySqlTableSchemaParser
             $this->checkForNumericOrString($schemaRow);
 
             $this->checkForRange($schemaRow);
+
+            // Note: Dates can be in different format and converted into MySQL format after validation
             $this->checkForDate($schemaRow);
+
             if (self::contains($schemaRow['Extra'], 'auto') === false) {
                 $this->checkIntegerType($schemaRow);
             }
@@ -196,7 +199,7 @@ class MySqlTableSchemaParser
 
     protected function checkForDefault($schemaRow)
     {
-        if ($schemaRow['Default'] != null) {
+        if (!($schemaRow['Default'] == null && $schemaRow['Null'] == 'NO')) {
             $this->tableSchema->defaultColumnList[ $schemaRow['Default'] ][] =
                 $schemaRow['Field'];
         }

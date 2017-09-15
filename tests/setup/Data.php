@@ -98,6 +98,8 @@ class Data
 
         'col_enum2' => 'value1',
         'col_set2' => 'value2',
+
+        // Note: Dates can be in different format and converted into MySQL format after validation
         'col_date2' => '1000-01-01',
         'col_datetime2' => '1000-01-01 00:00:00',
         'col_time2' => '838:59:59' // valid max is only '838:59:59.000000'
