@@ -160,8 +160,8 @@ CREATE TABLE t2
 CREATE TABLE person
 (
   person_id         INT PRIMARY KEY AUTO_INCREMENT,
-  person_firstname  VARCHAR(35) NOT NULL,
-  person_lastname   VARCHAR(35) NOT NULL,
+  person_firstname  VARCHAR(35) NOT NULL COMMENT 'First name',
+  person_lastname   VARCHAR(35) NOT NULL COMMENT 'Last name',
   person_gender     ENUM('male', 'female'),
   person_dob        DATE NULL,
   person_salary     DECIMAL UNSIGNED

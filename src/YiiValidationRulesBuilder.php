@@ -21,11 +21,11 @@ class YiiValidationRulesBuilder extends TableSchema
         if (isset(MySqlTableSchemaParser::$describeTable[$tableName])) {
             $tableSchemaRowList = MySqlTableSchemaParser::$describeTable[$tableName];
         } else {
-            $command = \Yii::$app->db->createCommand('DESCRIBE ' . $tableName);
+            $command = \Yii::$app->db->createCommand('SHOW FULL COLUMNS FROM ' . $tableName);
             $tableSchemaRowList = $command->queryAll();
             MySqlTableSchemaParser::$describeTable[$tableName] = $tableSchemaRowList;
 
-            $command = \Yii::$app->db->createCommand('SHOW CREATE TABLE ' . $tableName);
+            $command = \Yii::$app->db->createCommand('SHOW CREATE TABLE ' . $tableName); // to get 'UNIQUE KEY'
             $tableSchemaStr = $command->queryAll();
             MySqlTableSchemaParser::$showCreateTable[$tableName] =
                 $tableSchemaStr[0]['Create Table'];

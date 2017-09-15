@@ -59,11 +59,13 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
 
     public function attributeLabels()
     {
-        $attributeLabelList = [];
+        $attributeLabelList = $this->yiiValidationRulesBuilder->commentColumnList;
 
         foreach ($this->attributes() as $attribute) {
-            $attributeLabelList[$attribute] =
-                $this->generateAttributeLabel($attribute);
+            if (empty($attributeLabelList[$attribute])) {
+                $attributeLabelList[$attribute] =
+                    $this->generateAttributeLabel($attribute);
+            }
         }
 
         return $attributeLabelList;

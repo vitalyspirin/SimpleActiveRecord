@@ -34,6 +34,8 @@ class MySqlTableSchemaParser
             $this->checkForPositive($schemaRow);
 
             $this->checkForDefault($schemaRow);
+
+            $this->checkForComments($schemaRow);
         }
     }
 
@@ -198,6 +200,12 @@ class MySqlTableSchemaParser
             $this->tableSchema->defaultColumnList[ $schemaRow['Default'] ][] =
                 $schemaRow['Field'];
         }
+    }
+
+
+    protected function checkForComments($schemaRow)
+    {
+        $this->tableSchema->commentColumnList[ $schemaRow['Field'] ] = $schemaRow['Comment'];
     }
 
 
