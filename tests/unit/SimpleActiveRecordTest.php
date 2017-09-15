@@ -385,6 +385,21 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
     }
 
 
+    public function testDefaultValuesForNulls()
+    {
+        $t1 = new T1();
+
+        $result = false;
+        foreach ($t1->rules() as $rule) {
+            if ($rule[1] == 'default' && !isset($rule['value'])) {
+                $result = true;
+                break;
+            }
+        }
+        $this->assertTrue($result);
+    }
+
+
     public function testTableNameMethod()
     {
         try {
