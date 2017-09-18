@@ -6,7 +6,7 @@ Extension of Yii 2 ActiveRecord with automatically generated validators.
 
 To install it you can just download zip or use composer:
 ```
-composer require vitalyspirin/yii2-simpleactiverecord @dev
+composer require vitalyspirin/yii2-simpleactiverecord
 ```
 
 To use it in code:
