@@ -1,2 +1,3 @@
 vendor
 tests/setup/runtime
+.php_cs.cache
