@@ -158,7 +158,7 @@ class MySqlTableSchemaParser
             } else {
                 $this->tableSchema->integerWithRangeColumnList['bigint'][0][] = $schemaRow['Field'];
             }
-        } elseif (self::contains($schemaRow['Type'], ['int'])) {
+        } elseif (self::startsWith($schemaRow['Type'], 'int')) {
             if (self::contains($schemaRow['Type'], ['unsigned'])) {
                 $this->tableSchema->integerWithRangeColumnList['int unsigned'][0][] =
                     $schemaRow['Field'];
