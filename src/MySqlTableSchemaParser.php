@@ -78,6 +78,9 @@ class MySqlTableSchemaParser
                     !$this->maximumValidation) {
             $this->tableSchema->stringColumnList[TableSchema::DEFAULT_LEGNTH_STRINGS][]
                 = $schemaRow['Field'];
+        } elseif (self::contains($schemaRow['Type'], ['json', 'point'])) { // MySql 5.7
+            $this->tableSchema->stringColumnList[TableSchema::DEFAULT_LEGNTH_STRINGS][]
+                = $schemaRow['Field'];
         } else {
             $this->tableSchema->otherColumnList[] = $schemaRow['Field'];
         }

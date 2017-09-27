@@ -93,10 +93,10 @@ namespace app\models;
  * @property string $col_binary4
  * @property string $col_binary5
  * @property string $col_binary6
- * @property string $col_varbinary1
- * @property string $col_varbinary2
- * @property string $col_varbinary3
- * @property string $col_varbinary4
+ * @property resource $col_varbinary1
+ * @property resource $col_varbinary2
+ * @property resource $col_varbinary3
+ * @property resource $col_varbinary4
  * @property string $col_tinyblob1
  * @property string $col_tinyblob2
  * @property string $col_tinytext1
@@ -131,6 +131,8 @@ namespace app\models;
  * @property string $col_timestamp2
  * @property string $col_time1
  * @property string $col_time2
+ * @property string $col_json
+ * @property string $col_point
  * @property T2 $t2
  */
 class T1YiiModel extends \yii\db\ActiveRecord
@@ -153,7 +155,7 @@ class T1YiiModel extends \yii\db\ActiveRecord
             [['col_bit5', 'col_bit6', 'col_tinyint1', 'col_tinyint2', 'col_tinyint3', 'col_tinyint4', 'col_tinyint5', 'col_tinyint6', 'col_tinyint7', 'col_tinyint8', 'col_bool1', 'col_bool2', 'col_bool3', 'col_boolean1', 'col_boolean2', 'col_boolean3', 'col_smallint1', 'col_smallint2', 'col_smallint3', 'col_smallint4', 'col_smallint5', 'col_mediumint1', 'col_mediumint2', 'col_mediumint3', 'col_mediumint4', 'col_mediumint5', 'col_int1', 'col_int2', 'col_int3', 'col_int4', 'col_int5', 'col_integer1', 'col_integer2', 'col_integer3', 'col_integer4', 'col_integer5', 'col_bigint1', 'col_bigint2', 'col_bigint3', 'col_bigint4', 'col_bigint5', 'col_bigint6'], 'integer'],
             [['col_tinyint2', 'col_tinyint4', 'col_bool2', 'col_boolean2', 'col_smallint2', 'col_smallint4', 'col_mediumint2', 'col_mediumint4', 'col_int2', 'col_int4', 'col_integer2', 'col_integer4', 'col_bigint2', 'col_bigint4', 'col_decimal2', 'col_decimal4', 'col_dec2', 'col_dec4', 'col_float2', 'col_float4', 'col_double2', 'col_double4', 'col_doubleprecision2', 'col_doubleprecision4', 'col_char2', 'col_char4', 'col_varchar2', 'col_binary2', 'col_binary4', 'col_varbinary2', 'col_tinyblob2', 'col_tinytext2', 'col_blob2', 'col_text2', 'col_mediumblob2', 'col_mediumtext2', 'col_longblob2', 'col_longtext2', 'col_enum2', 'col_set2', 'col_date2', 'col_datetime2', 'col_time2'], 'required'],
             [['col_decimal1', 'col_decimal2', 'col_decimal3', 'col_decimal4', 'col_decimal5', 'col_dec1', 'col_dec2', 'col_dec3', 'col_dec4', 'col_dec5', 'col_float1', 'col_float2', 'col_float3', 'col_float4', 'col_float5', 'col_double1', 'col_double2', 'col_double3', 'col_double4', 'col_double5', 'col_doubleprecision1', 'col_doubleprecision2', 'col_doubleprecision3', 'col_doubleprecision4', 'col_doubleprecision5'], 'number'],
-            [['col_tinyblob1', 'col_tinyblob2', 'col_tinytext1', 'col_tinytext2', 'col_blob1', 'col_blob2', 'col_text1', 'col_text2', 'col_mediumblob1', 'col_mediumblob2', 'col_mediumtext1', 'col_mediumtext2', 'col_longblob1', 'col_longblob2', 'col_longtext1', 'col_longtext2', 'col_enum1', 'col_enum2', 'col_enum3', 'col_enum4', 'col_set1', 'col_set2', 'col_set3', 'col_set4'], 'string'],
+            [['col_tinyblob1', 'col_tinyblob2', 'col_tinytext1', 'col_tinytext2', 'col_blob1', 'col_blob2', 'col_text1', 'col_text2', 'col_mediumblob1', 'col_mediumblob2', 'col_mediumtext1', 'col_mediumtext2', 'col_longblob1', 'col_longblob2', 'col_longtext1', 'col_longtext2', 'col_enum1', 'col_enum2', 'col_enum3', 'col_enum4', 'col_set1', 'col_set2', 'col_set3', 'col_set4', 'col_json', 'col_point'], 'string'],
             [['col_date1', 'col_date2', 'col_datetime1', 'col_datetime2', 'col_datetime3', 'col_datetime4', 'col_timestamp1', 'col_timestamp2', 'col_time1', 'col_time2'], 'safe'],
             [['col_char1', 'col_char2', 'col_char5', 'col_char6', 'col_binary1', 'col_binary2'], 'string', 'max' => 1],
             [['col_char3', 'col_char4', 'col_varchar1', 'col_varchar3', 'col_binary3', 'col_binary4', 'col_binary5', 'col_binary6', 'col_varbinary1', 'col_varbinary3'], 'string', 'max' => 2],
@@ -161,7 +163,7 @@ class T1YiiModel extends \yii\db\ActiveRecord
             [['col_int1'], 'unique'],
             [['col_integer1', 'col_integer3'], 'unique', 'targetAttribute' => ['col_integer1', 'col_integer3'], 'message' => 'The combination of Col Integer1 and Col Integer3 has already been taken.'],
             [['col_bigint1', 'col_bigint3', 'col_bigint5'], 'unique', 'targetAttribute' => ['col_bigint1', 'col_bigint3', 'col_bigint5'], 'message' => 'The combination of Col Bigint1, Col Bigint3 and Col Bigint5 has already been taken.'],
-            [['col_timestamp1'], 'unique']
+            [['col_timestamp1'], 'unique'],
         ];
     }
 
@@ -297,6 +299,8 @@ class T1YiiModel extends \yii\db\ActiveRecord
             'col_timestamp2' => 'Col Timestamp2',
             'col_time1' => 'Col Time1',
             'col_time2' => 'Col Time2',
+            'col_json' => 'Col Json',
+            'col_point' => 'Col Point',
         ];
     }
 

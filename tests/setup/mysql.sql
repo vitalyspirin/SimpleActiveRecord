@@ -11,14 +11,14 @@ DROP TABLE IF EXISTS t1;
 CREATE TABLE t1
 (
     col_id          INTEGER PRIMARY KEY AUTO_INCREMENT,
-    
+
     col_bit1        BIT,
     col_bit2        BIT NOT NULL,
     col_bit3        BIT(1),
     col_bit4        BIT(1) NOT NULL,
     col_bit5        BIT(2),
     col_bit6        BIT(2) NOT NULL,
-    
+
     col_tinyint1    TINYINT,
     col_tinyint2    TINYINT NOT NULL,
     col_tinyint3    TINYINT UNSIGNED,
@@ -84,7 +84,7 @@ CREATE TABLE t1
     col_doubleprecision3     DOUBLE PRECISION UNSIGNED,
     col_doubleprecision4     DOUBLE PRECISION UNSIGNED NOT NULL,
     col_doubleprecision5     DOUBLE PRECISION NOT NULL DEFAULT 19,
-    
+
     col_char1       CHAR,
     col_char2       CHAR NOT NULL,
     col_char3       CHAR(2),
@@ -147,9 +147,13 @@ CREATE TABLE t1
     UNIQUE double_columns_unique (col_integer1, col_integer3),
     UNIQUE triple_columns_unique (col_bigint1, col_bigint3, col_bigint5),
 
-    UNIQUE (col_timestamp1) -- to test that col_timestamp1 won't have 'safe' validator
+    UNIQUE (col_timestamp1), -- to test that col_timestamp1 won't have 'safe' validator
 
+    -- MySQL v 5.7 =>
+    col_json        JSON,
+    col_point       POINT
 );
+
 
 CREATE TABLE t2
 (
