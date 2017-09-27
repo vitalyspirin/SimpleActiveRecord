@@ -434,11 +434,18 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
     {
         $t1 = new T1();
         $rules = $t1->rules();
+
+        $found = false;
         foreach ($rules as $rule) {
             if ($rule[1] == 'integer') {
                 $this->assertFalse(in_array('col_point', $rule[0]), "'col_point' must not have 'integer' validator");
             }
+
+            if ($rule[1] == 'string') {
+                $found = $found || in_array('col_point', $rule[0]);
+            }
         }
+        $this->assertTrue($found, "'col_point' must have 'string' validator");
     }
 
 

@@ -60,7 +60,7 @@ class MySqlTableSchemaParser
     {
         if (self::contains($schemaRow['Type'], 'bit(1)')) {
             $this->tableSchema->booleanColumnList[] = $schemaRow['Field'];
-        } elseif (self::contains($schemaRow['Type'], ['int', 'bit'])) {
+        } elseif (self::startsWith($schemaRow['Type'], ['tinyint', 'smallint', 'mediumint', 'int', 'bigint', 'bit'])) {
             if (stripos($schemaRow['Extra'], 'auto') === false) {
                 $this->tableSchema->integerColumnList[] = $schemaRow['Field'];
             }
@@ -237,10 +237,18 @@ class MySqlTableSchemaParser
 
     protected static function startsWith($haystack, $needle)
     {
-        if (substr($haystack, 0, strlen($needle)) === $needle) {
-            $result = true;
+        if (!is_array($needle)) {
+            $needleList = [$needle];
         } else {
-            $result = false;
+            $needleList = $needle;
+        }
+
+        $result = false;
+        foreach ($needleList as $needle) {
+            if (substr($haystack, 0, strlen($needle)) === $needle) {
+                $result = true;
+                break;
+            }
         }
 
         return $result;
