@@ -449,6 +449,20 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
     }
 
 
+    public function testUniquePoint()
+    {
+        $t1 = new T1();
+        $rules = $t1->rules();
+
+        $found = false;
+        foreach ($rules as $rule) {
+            if ($rule[1] == 'unique') {
+                $this->assertFalse(in_array('col_point', $rule[0]), "'col_point' must not have 'unique' validator");
+            }
+        }
+    }
+
+
     protected function compareMultidimensionalArrays($array1, $array2,
         $array1Name = 'First array', $array2Name = 'Second Array')
     {

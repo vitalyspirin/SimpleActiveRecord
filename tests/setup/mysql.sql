@@ -151,7 +151,9 @@ CREATE TABLE t1
 
     -- MySQL v 5.7 =>
     col_json        JSON,
-    col_point       POINT
+    col_point       POINT,
+    UNIQUE (col_point) -- shouldn't have 'unique' validator because this field
+                        -- can not used in WHERE clauze without Geo function
 );
 
 

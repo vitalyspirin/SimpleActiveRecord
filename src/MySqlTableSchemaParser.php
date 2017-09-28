@@ -7,6 +7,7 @@ class MySqlTableSchemaParser
     protected $maximumValidation;
     protected $tableName;
     protected $tableSchema;
+    protected $columnTypes;
 
     public static $describeTable;
     public static $showCreateTable;
@@ -19,9 +20,9 @@ class MySqlTableSchemaParser
         $this->maximumValidation = $maximumValidation;
         $this->tableName = $tableName;
 
-        $this->checkForUnique();
-
         foreach ($tableSchemaRowList as $schemaRow) {
+            $this->columnTypes[$schemaRow['Field']] = $schemaRow['Type'];
+
             $this->checkForRequired($schemaRow);
             $this->checkForNumericOrString($schemaRow);
 
@@ -40,6 +41,8 @@ class MySqlTableSchemaParser
 
             $this->checkForComments($schemaRow);
         }
+
+        $this->checkForUnique();
     }
 
 
@@ -96,7 +99,20 @@ class MySqlTableSchemaParser
             foreach ($matches[1] as $uniqueConstraint) {
                 $pattern = '/(`([^`]+)`,?)+?/sm';
                 preg_match_all($pattern, $uniqueConstraint, $matches2);
-                $this->tableSchema->uniqueColumnList[] = $matches2[2];
+
+                // insure that POINT type column is not in unique constraint (because
+                // it can not be used in WHERE clauze without Geo function)
+                $addToIndex = true;
+                foreach ($matches2[2] as $columnName) {
+                    if ($this->columnTypes[$columnName] == 'point') {
+                        $addToIndex = false;
+                        break;
+                    }
+                }
+
+                if ($addToIndex) {
+                    $this->tableSchema->uniqueColumnList[] = $matches2[2];
+                }
             }
         }
     }
