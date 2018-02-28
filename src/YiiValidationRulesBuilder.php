@@ -198,7 +198,8 @@ class YiiValidationRulesBuilder extends TableSchema
     public function buildDefaultRules(&$ruleList)
     {
         foreach ($this->defaultColumnList as $value => $attributeList) {
-            if ($value === 'CURRENT_TIMESTAMP') {
+            if ($value === 'CURRENT_TIMESTAMP' /* MySql */
+                || $value === 'current_timestamp()' /* MariaDB */) {
                 $ruleList[] = [$attributeList, 'default', 'value' =>
                     function ($model, $attribute) {
                         return date('Y-m-d H:i:s');
