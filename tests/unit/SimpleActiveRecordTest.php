@@ -5,6 +5,7 @@
 ini_set('display_errors', 1);
 
 require_once(__DIR__ . '/../../src/SimpleActiveRecord.php');
+require_once(__DIR__ . '/../../src/YiiValidationRulesBuilder.php');
 require_once(__DIR__ . '/../setup/T1.php');
 require_once(__DIR__ . '/../setup/T2.php');
 require_once(__DIR__ . '/../setup/T3.php');
@@ -14,8 +15,11 @@ require_once(__DIR__ . '/../setup/T1YiiModel.php');
 require_once(__DIR__ . '/../setup/T2YiiModel.php');
 require_once(__DIR__ . '/../setup/Data.php');
 
+
 use app\models\T1YiiModel;
+
 use app\models\T2YiiModel;
+use vitalyspirin\yii2\simpleactiverecord\YiiValidationRulesBuilder;
 
 /**
  * @covers SimpleActiveRecord
@@ -48,7 +52,31 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
     }
 
 
-    // it has to be first call to particular ActiveRecord Model type
+    public function testNonSupportedDatabase()
+    {
+        Yii::$app->db->dsn = 'sqlsrv:server=localhost';
+        static::setDSN();
+
+        try {
+            $person = new Person();
+        } catch (\Exception $e) {
+            $this->assertEquals($e->getMessage(), YiiValidationRulesBuilder::DATABASE_IS_NOT_SUPPORTED);
+
+            Yii::$app->db->dsn = 'mysql:server=localhost';
+            static::setDSN();
+
+            return;
+        }
+
+        $this->fail();
+    }
+
+
+    /**
+     * @depends testNonSupportedDatabase
+     *
+     * it has to be first call to particular ActiveRecord Model type
+     */
     public function testBuildValidationRulesOnlyOncePerType()
     {
         // validation rules are stored in static and should not be build second time

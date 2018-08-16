@@ -14,7 +14,7 @@ class YiiValidationRulesBuilder extends TableSchema
     public function __construct($maximumValidation, $tableName)
     {
         if (! $this->isDatabaseSupported(\Yii::$app->db->dsn)) {
-            throw new Exception(DATABASE_IS_NOT_SUPPORTED);
+            throw new \Exception(static::DATABASE_IS_NOT_SUPPORTED);
         }
 
 
