@@ -5,8 +5,8 @@ return [
 
     // if database 'simpleactiverecord' already exist then you can uncomment
     // the line below and use it intead of the line after that
-    //'dsn' => 'mysql:host=localhost;dbname=simpleactiverecord',
-    'dsn' => 'mysql:host=localhost',
+    // 'dsn' => 'mysql:host=localhost;port=3307;dbname=simpleactiverecord',
+    'dsn' => 'mysql:host=localhost;port=3307',
 
     'username' => 'root',
     'password' => '',

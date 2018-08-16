@@ -1,6 +1,6 @@
 <?php
-
-require_once(__DIR__ . '/../setup/yii_init.php');
+// echo 'vitaly';exit;
+// require_once(__DIR__ . '/../setup/yii_init.php');
 
 ini_set('display_errors', 1);
 
@@ -44,34 +44,24 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
-        try {
-            $result = $command->execute();
-        } catch (Exception $e) {
-            echo 'Exception: ' . $e->getMessage() . "\n";
-            echo "Possilbe cause: MySQL is not running!\n";
-            exit;
-        }
-
-        $command = Yii::$app->db->nocache(function (\yii\db\Connection $db) {
-            $SqlStr = file_get_contents(__DIR__ . '/../setup/mysql.sql');
-
-            return $db->createCommand($SqlStr);
-        });
-        $result = $command->execute();
-
-
-        // closing and opening connection below is needed otherwise Yii gives error:
-        // "Cannot execute queries while other unbuffered queries are active."
-        Yii::$app->db->close();
-        self::setDSN();
-        Yii::$app->db->open();
-
-        $command = Yii::$app->db->createCommand("SET @@sql_mode = ''");
-        $result = $command->execute();
-
-
         parent::__construct($name, $data, $dataName);
+    }
+
+
+    // it has to be first call to particular ActiveRecord Model type
+    public function testBuildValidationRulesOnlyOncePerType()
+    {
+        // validation rules are stored in static and should not be build second time
+
+        $timeStart = microtime(true);
+        $person1 = new Person();
+        $timeDuration1 = microtime(true) - $timeStart;
+
+        $timeStart = microtime(true);
+        $person2 = new Person();
+        $timeDuration2 = microtime(true) - $timeStart;
+
+        $this->assertTrue($timeDuration2 * 100 < $timeDuration1);
     }
 
 
@@ -412,6 +402,9 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
     }
 
 
+    /**
+     * @depends testBuildValidationRulesOnlyOncePerType
+     */
     public function testLabels()
     {
         $person = new Person();
@@ -423,6 +416,9 @@ class SimpleActiveRecordTest extends PHPUnit_Framework_TestCase
     }
 
 
+    /**
+     * @depends testBuildValidationRulesOnlyOncePerType
+     */
     public function testView()
     {
         $person = new PersonView();

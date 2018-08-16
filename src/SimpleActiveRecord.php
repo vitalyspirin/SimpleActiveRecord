@@ -7,7 +7,7 @@ use yii\helpers\Inflector;
 class SimpleActiveRecord extends \yii\db\ActiveRecord
 {
     protected static $ruleList = [];
-    protected $yiiValidationRulesBuilder;
+    protected static $yiiValidationRulesBuilder;
     protected $maximumValidation;
 
 
@@ -21,8 +21,10 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
                                             // and only parameter
         }
 
-        $this->yiiValidationRulesBuilder =
-            new YiiValidationRulesBuilder($this->maximumValidation, static::tableName());
+        if (!isset(static::$yiiValidationRulesBuilder[static::tableName()][$this->maximumValidation])) {
+            static::$yiiValidationRulesBuilder[static::tableName()][$this->maximumValidation] =
+                new YiiValidationRulesBuilder($this->maximumValidation, static::tableName());
+        }
 
 
         if (!isset(static::$ruleList[static::tableName()][$this->maximumValidation])) {
@@ -59,7 +61,7 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
 
     public function attributeLabels()
     {
-        $attributeLabelList = $this->yiiValidationRulesBuilder->commentColumnList;
+        $attributeLabelList = $this->getYiiValidationRulesBuilder()->commentColumnList;
 
         foreach ($this->attributes() as $attribute) {
             if (empty($attributeLabelList[$attribute])) {
@@ -74,27 +76,34 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
 
     public function getEnumValues()
     {
-        return $this->yiiValidationRulesBuilder->enumValuesColumnList;
+        return $this->getYiiValidationRulesBuilder()->enumValuesColumnList;
     }
 
+
+    protected function getYiiValidationRulesBuilder()
+    {
+        return static::$yiiValidationRulesBuilder[static::tableName()][$this->maximumValidation];
+    }
 
     protected function buildDefaultRules()
     {
         $ruleList = [];
 
-        $this->yiiValidationRulesBuilder->buildBooleanRules($ruleList);
+        $yiiValidationRulesBuilder = $this->getYiiValidationRulesBuilder();
 
-        $this->yiiValidationRulesBuilder->buildIntegerRules($ruleList);
+        $yiiValidationRulesBuilder->buildBooleanRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildRequiredRules($ruleList);
+        $yiiValidationRulesBuilder->buildIntegerRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildNumericRules($ruleList);
+        $yiiValidationRulesBuilder->buildRequiredRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildOtherRules($ruleList);
+        $yiiValidationRulesBuilder->buildNumericRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildStringRules($ruleList);
+        $yiiValidationRulesBuilder->buildOtherRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildUniqueRules($ruleList);
+        $yiiValidationRulesBuilder->buildStringRules($ruleList);
+
+        $yiiValidationRulesBuilder->buildUniqueRules($ruleList);
 
         static::$ruleList[static::tableName()][$this->maximumValidation] = $ruleList;
     }
@@ -104,23 +113,25 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
     {
         $ruleList = [];
 
-        $this->yiiValidationRulesBuilder->buildRequiredRules($ruleList);
+        $yiiValidationRulesBuilder = $this->getYiiValidationRulesBuilder();
 
-        $this->yiiValidationRulesBuilder->buildRangeRules($ruleList);
+        $yiiValidationRulesBuilder->buildRequiredRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildDateRules($ruleList);
+        $yiiValidationRulesBuilder->buildRangeRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildTimeRules($ruleList);
+        $yiiValidationRulesBuilder->buildDateRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildIntegerWithRangeRules($ruleList);
+        $yiiValidationRulesBuilder->buildTimeRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildNumberWithRangeRules($ruleList);
+        $yiiValidationRulesBuilder->buildIntegerWithRangeRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildStringRules($ruleList);
+        $yiiValidationRulesBuilder->buildNumberWithRangeRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildUniqueRules($ruleList);
+        $yiiValidationRulesBuilder->buildStringRules($ruleList);
 
-        $this->yiiValidationRulesBuilder->buildDefaultRules($ruleList);
+        $yiiValidationRulesBuilder->buildUniqueRules($ruleList);
+
+        $yiiValidationRulesBuilder->buildDefaultRules($ruleList);
 
         static::$ruleList[static::tableName()][$this->maximumValidation] = $ruleList;
     }
