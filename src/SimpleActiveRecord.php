@@ -115,6 +115,8 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
 
         $yiiValidationRulesBuilder = $this->getYiiValidationRulesBuilder();
 
+        $yiiValidationRulesBuilder->buildDefaultRules($ruleList); // has to be first to fill value before applying other rules
+
         $yiiValidationRulesBuilder->buildRequiredRules($ruleList);
 
         $yiiValidationRulesBuilder->buildRangeRules($ruleList);
@@ -130,8 +132,6 @@ class SimpleActiveRecord extends \yii\db\ActiveRecord
         $yiiValidationRulesBuilder->buildStringRules($ruleList);
 
         $yiiValidationRulesBuilder->buildUniqueRules($ruleList);
-
-        $yiiValidationRulesBuilder->buildDefaultRules($ruleList);
 
         static::$ruleList[static::tableName()][$this->maximumValidation] = $ruleList;
     }
